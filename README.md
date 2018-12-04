@@ -1,5 +1,5 @@
 # XJar-Maven-Plugin
-#### XJar-Maven-Plugin 是对[XJar](https://github.com/core-lib/xjar)的一个Maven Plugin封装，实现可通过Maven命令或绑定在Maven构建的生命周期之中执行，用以更加便捷的方式集成[XJar](https://github.com/core-lib/xjar)。
+#### XJar-Maven-Plugin 是对 [XJar](https://github.com/core-lib/xjar) 的一个Maven Plugin封装，实现可通过Maven命令或绑定在Maven构建的生命周期之中执行，用以更加便捷的方式集成 [XJar](https://github.com/core-lib/xjar) 。
 
 GitHub: https://github.com/core-lib/xjar-maven-plugin
 
@@ -41,9 +41,15 @@ JDK 1.7 +
 ```
 
 ## **参数说明**
-| 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 可选值 |
+| 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 示例值 |
 | :------ | :----------- | :------ | :------ | :----- | :----- |
 | algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES | JDK内置加密算法，如：AES / DES |
-| keySize | -Dxjar.keySize | 加密算法名称 | int | 128 | 根据加密算法而定 |
-| ivSize | -Dxjar.ivSize | 加密算法名称 | int | 128 | 根据加密算法而定 |
-| password | -Dxjar.password | 加密算法名称 | String | 必须 | 任意字符串 |
+| keySize | -Dxjar.keySize | 密钥长度 | int | 128 | 根据加密算法而定，56，128，256 |
+| ivSize | -Dxjar.ivSize | 密钥向量长度 | int | 128 | 根据加密算法而定，128 |
+| password | -Dxjar.password | 密码字符串 | String | 必须 | 任意字符串，io.xjar |
+| sourceDir | -Dxjar.sourceDir | 源jar所在目录 | String | ${project.build.directory} | 文件目录 |
+| sourceJar | -Dxjar.sourceJar | 源jar名称 | String | ${project.build.finalName}.jar | 文件名称 |
+| targetDir | -Dxjar.targetDir | 目标jar存放目录 | String | ${project.build.directory} | 文件目录 |
+| targetDir | -Dxjar.targetJar | 目标jar名称 | String | ${project.build.finalName}.xjar | 文件名称 |
+| includes | -Dxjar.includes | 需要加密的包内资源 | String[] | 无 | BOOT-INF/classes/** BOOT-INF/lib/xjar-*.jar |
+| includes | -Dxjar.excludes | 无需加密的包内资源 | String[] | 无 | BOOT-INF/classes/** BOOT-INF/lib/xjar-*.jar |

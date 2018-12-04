@@ -44,26 +44,26 @@ public abstract class XBuilder extends AbstractMojo {
     /**
      * 原本JAR所在文件夹
      */
-    @Parameter(property = "xjar.originalDir", required = true, defaultValue = "${project.build.directory}")
-    protected File originalDir;
+    @Parameter(property = "xjar.sourceDir", required = true, defaultValue = "${project.build.directory}")
+    protected File sourceDir;
 
     /**
      * 原本JAR名称
      */
-    @Parameter(property = "xjar.originalJar", required = true, defaultValue = "${project.build.finalName}.jar")
-    protected String originalJar;
+    @Parameter(property = "xjar.sourceJar", required = true, defaultValue = "${project.build.finalName}.jar")
+    protected String sourceJar;
 
     /**
      * 生成JAR所在文件夹
      */
-    @Parameter(property = "xjar.generateDir", required = true, defaultValue = "${project.build.directory}")
-    protected File generateDir;
+    @Parameter(property = "xjar.targetDir", required = true, defaultValue = "${project.build.directory}")
+    protected File targetDir;
 
     /**
      * 生成JAR名称
      */
-    @Parameter(property = "xjar.generateJar", required = true, defaultValue = "${project.build.finalName}.xjar")
-    protected String generateJar;
+    @Parameter(property = "xjar.targetJar", required = true, defaultValue = "${project.build.finalName}.xjar")
+    protected String targetJar;
 
     /**
      * 包含资源，避免和excludes配置一起使用，如果混合使用则excludes失效。
@@ -104,8 +104,8 @@ public abstract class XBuilder extends AbstractMojo {
                 log.debug("Using iv-size: " + ivSize);
                 log.debug("Using password: " + algorithm);
             }
-            File src = new File(originalDir, originalJar);
-            File dest = new File(generateDir, generateJar);
+            File src = new File(sourceDir, sourceJar);
+            File dest = new File(targetDir, targetJar);
             File folder = dest.getParentFile();
             if (!folder.exists() && !folder.mkdirs() && !folder.exists()) {
                 throw new IOException("could not make directory: " + folder);
@@ -182,36 +182,36 @@ public abstract class XBuilder extends AbstractMojo {
         this.password = password;
     }
 
-    public File getOriginalDir() {
-        return originalDir;
+    public File getSourceDir() {
+        return sourceDir;
     }
 
-    public void setOriginalDir(File originalDir) {
-        this.originalDir = originalDir;
+    public void setSourceDir(File sourceDir) {
+        this.sourceDir = sourceDir;
     }
 
-    public String getOriginalJar() {
-        return originalJar;
+    public String getSourceJar() {
+        return sourceJar;
     }
 
-    public void setOriginalJar(String originalJar) {
-        this.originalJar = originalJar;
+    public void setSourceJar(String sourceJar) {
+        this.sourceJar = sourceJar;
     }
 
-    public File getGenerateDir() {
-        return generateDir;
+    public File getTargetDir() {
+        return targetDir;
     }
 
-    public void setGenerateDir(File generateDir) {
-        this.generateDir = generateDir;
+    public void setTargetDir(File targetDir) {
+        this.targetDir = targetDir;
     }
 
-    public String getGenerateJar() {
-        return generateJar;
+    public String getTargetJar() {
+        return targetJar;
     }
 
-    public void setGenerateJar(String generateJar) {
-        this.generateJar = generateJar;
+    public void setTargetJar(String targetJar) {
+        this.targetJar = targetJar;
     }
 
     public String[] getIncludes() {
