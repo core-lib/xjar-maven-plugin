@@ -7,6 +7,7 @@ import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * XJar 构建插件
@@ -20,49 +21,49 @@ public abstract class XBuilder extends AbstractMojo {
      * 加密算法名称
      */
     @Parameter(property = "xjar.algorithm", required = true, defaultValue = "AES")
-    private String algorithm;
+    protected String algorithm;
 
     /**
      * 加密密钥长度
      */
     @Parameter(property = "xjar.keySize", required = true, defaultValue = "128")
-    private int keySize;
+    protected int keySize;
 
     /**
      * 加密向量长度
      */
     @Parameter(property = "xjar.ivSize", required = true, defaultValue = "128")
-    private int ivSize;
+    protected int ivSize;
 
     /**
      * 加密密码
      */
     @Parameter(property = "xjar.password", required = true)
-    private String password;
+    protected String password;
 
     /**
      * 原本JAR所在文件夹
      */
     @Parameter(property = "xjar.originalDir", required = true, defaultValue = "${project.build.directory}")
-    private File originalDir;
+    protected File originalDir;
 
     /**
      * 原本JAR名称
      */
     @Parameter(property = "xjar.originalJar", required = true, defaultValue = "${project.build.finalName}.jar")
-    private String originalJar;
+    protected String originalJar;
 
     /**
      * 生成JAR所在文件夹
      */
     @Parameter(property = "xjar.generateDir", required = true, defaultValue = "${project.build.directory}")
-    private File generateDir;
+    protected File generateDir;
 
     /**
      * 生成JAR名称
      */
     @Parameter(property = "xjar.generateJar", required = true, defaultValue = "${project.build.finalName}.xjar")
-    private String generateJar;
+    protected String generateJar;
 
     /**
      * 包含资源，避免和excludes配置一起使用，如果混合使用则excludes失效。
@@ -72,7 +73,7 @@ public abstract class XBuilder extends AbstractMojo {
      * BOOT-INF/lib/*.jar
      */
     @Parameter(property = "xjar.includes")
-    private String[] includes;
+    protected String[] includes;
 
     /**
      * 排除资源，避免和includes配置一起使用，如果混合使用则excludes失效。
@@ -82,19 +83,20 @@ public abstract class XBuilder extends AbstractMojo {
      * BOOT-INF/lib/*.jar
      */
     @Parameter(property = "xjar.excludes")
-    private String[] excludes;
+    protected String[] excludes;
 
     /**
      * 项目打包模式，只对packaging == jar 的模块构建XJar
      */
     @Parameter(readonly = true, defaultValue = "${project.packaging}")
-    private String packaging;
+    protected String packaging;
 
     public void execute() throws MojoExecutionException {
+        Log log = getLog();
         if (!"jar".equalsIgnoreCase(packaging)) {
+            log.info("Skip for packaging: " + packaging);
             return;
         }
-        Log log = getLog();
         try {
             if (log.isDebugEnabled()) {
                 log.debug("Using algorithm: " + algorithm);
@@ -104,6 +106,10 @@ public abstract class XBuilder extends AbstractMojo {
             }
             File src = new File(originalDir, originalJar);
             File dest = new File(generateDir, generateJar);
+            File folder = dest.getParentFile();
+            if (!folder.exists() && !folder.mkdirs() && !folder.exists()) {
+                throw new IOException("could not make directory: " + folder);
+            }
             log.info("Building xjar: " + dest + " for jar: " + src);
             XEntryFilter<JarArchiveEntry> filter;
             if (includes != null && includes.length > 0) {
