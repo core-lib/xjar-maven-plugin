@@ -91,7 +91,6 @@ public abstract class XBuilder extends AbstractMojo {
     private String packaging;
 
     public void execute() throws MojoExecutionException {
-        System.out.println(packaging);
         if (!"jar".equalsIgnoreCase(packaging)) {
             return;
         }
