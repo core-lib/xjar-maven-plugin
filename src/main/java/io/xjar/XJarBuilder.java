@@ -2,6 +2,7 @@ package io.xjar;
 
 import io.xjar.jar.XJar;
 import org.apache.commons.compress.archivers.jar.JarArchiveEntry;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import java.io.File;
  * @author Payne 646742615@qq.com
  * 2018/12/4 14:02
  */
-@Mojo(name = "jar")
+@Mojo(name = "jar", defaultPhase = LifecyclePhase.PACKAGE)
 public class XJarBuilder extends XBuilder {
 
     @Override

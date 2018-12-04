@@ -84,7 +84,14 @@ public abstract class XBuilder extends AbstractMojo {
     @Parameter(property = "xjar.excludes")
     private String[] excludes;
 
+    @Parameter(readonly = true, defaultValue = "${project.packaging}")
+    private String packaging;
+
     public void execute() throws MojoExecutionException {
+        System.out.println(packaging);
+        if (!"jar".equalsIgnoreCase(packaging)) {
+            return;
+        }
         Log log = getLog();
         try {
             if (log.isDebugEnabled()) {
@@ -213,5 +220,13 @@ public abstract class XBuilder extends AbstractMojo {
 
     public void setExcludes(String[] excludes) {
         this.excludes = excludes;
+    }
+
+    public String getPackaging() {
+        return packaging;
+    }
+
+    public void setPackaging(String packaging) {
+        this.packaging = packaging;
     }
 }
