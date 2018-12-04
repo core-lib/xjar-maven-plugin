@@ -3,10 +3,10 @@
 
 GitHub: https://github.com/core-lib/xjar-maven-plugin
 
-## **环境依赖**
+## 环境依赖
 JDK 1.7 +
 
-## **集成步骤**
+## 集成步骤
 ```xml
 <project>
     <!-- 设置 jitpack.io 插件仓库 -->
@@ -40,16 +40,35 @@ JDK 1.7 +
 </project>
 ```
 
-## **参数说明**
+## 命令目标
+| 目标名称 | 目标说明 |
+| :------- | :------ |
+| spring-boot | Spring-Boot项目或模块使用 |
+| jar | 普通jar项目或模块使用 |
+
+## 参数说明
 | 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 示例值 |
 | :------ | :----------- | :------ | :------ | :----- | :----- |
 | algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES | JDK内置加密算法，如：AES / DES |
 | keySize | -Dxjar.keySize | 密钥长度 | int | 128 | 根据加密算法而定，56，128，256 |
 | ivSize | -Dxjar.ivSize | 密钥向量长度 | int | 128 | 根据加密算法而定，128 |
 | password | -Dxjar.password | 密码字符串 | String | 必须 | 任意字符串，io.xjar |
-| sourceDir | -Dxjar.sourceDir | 源jar所在目录 | String | ${project.build.directory} | 文件目录 |
+| sourceDir | -Dxjar.sourceDir | 源jar所在目录 | File | ${project.build.directory} | 文件目录 |
 | sourceJar | -Dxjar.sourceJar | 源jar名称 | String | ${project.build.finalName}.jar | 文件名称 |
-| targetDir | -Dxjar.targetDir | 目标jar存放目录 | String | ${project.build.directory} | 文件目录 |
+| targetDir | -Dxjar.targetDir | 目标jar存放目录 | File | ${project.build.directory} | 文件目录 |
 | targetDir | -Dxjar.targetJar | 目标jar名称 | String | ${project.build.finalName}.xjar | 文件名称 |
-| includes | -Dxjar.includes | 需要加密的包内资源 | String[] | 无 | BOOT-INF/classes/** BOOT-INF/lib/xjar-*.jar |
-| includes | -Dxjar.excludes | 无需加密的包内资源 | String[] | 无 | BOOT-INF/classes/** BOOT-INF/lib/xjar-*.jar |
+| includes | -Dxjar.includes | 需要加密的包内资源 | String[] | 无 | BOOT-INF/classes/ BOOT-INF/lib/xjar-*.jar 支持Ant表达式 |
+| includes | -Dxjar.excludes | 无需加密的包内资源 | String[] | 无 | BOOT-INF/classes/ BOOT-INF/lib/xjar-*.jar 支持Ant表达式 |
+
+#### 注意：
+当 includes 和 excludes 同时使用是，excludes将会失效！
+
+## 版本记录
+* v1.0.4
+    * 首个正式版版本发布
+
+## 协议声明
+[Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+## 联系作者
+QQ 646742615 不会钓鱼的兔子
