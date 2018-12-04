@@ -65,7 +65,7 @@ JDK 1.7 +
 
 ## 版本记录
 * v1.0.4
-    * 首个正式版版本发布
+    * 第一个正式版发布
 
 ## 协议声明
 [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)
