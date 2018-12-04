@@ -31,6 +31,21 @@ JDK 1.7 +
                         <phase>package</phase>
                         <configuration>
                             <password>io.xjar</password>
+                            <!-- optional
+                            <algorithm/>
+                            <keySize/>
+                            <ivSize/>
+                            <includes>
+                                <include/>
+                            </includes>
+                            <excludes>
+                                <exclude/>
+                            </excludes>
+                            <sourceDir/>
+                            <sourceJar/>
+                            <targetDir/>
+                            <targetJar/>
+                            -->
                         </configuration>
                     </execution>
                 </executions>
@@ -38,6 +53,11 @@ JDK 1.7 +
         </plugins>
     </build>
 </project>
+```
+#### 也可以通过Maven命令执行
+```text
+mvn xjar:spring-boot -Dxjar.password=io.xjar
+mvn xjar:jar -Dxjar.password=io.xjar -Dxjar.targetDir=/path/to/save/target.xjar 
 ```
 
 ## 命令目标
@@ -49,10 +69,10 @@ JDK 1.7 +
 ## 参数说明
 | 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 示例值 |
 | :------ | :----------- | :------ | :------ | :----- | :----- |
+| password | -Dxjar.password | 密码字符串 | String | 必须 | 任意字符串，io.xjar |
 | algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES | JDK内置加密算法，如：AES / DES |
 | keySize | -Dxjar.keySize | 密钥长度 | int | 128 | 根据加密算法而定，56，128，256 |
 | ivSize | -Dxjar.ivSize | 密钥向量长度 | int | 128 | 根据加密算法而定，128 |
-| password | -Dxjar.password | 密码字符串 | String | 必须 | 任意字符串，io.xjar |
 | sourceDir | -Dxjar.sourceDir | 源jar所在目录 | File | ${project.build.directory} | 文件目录 |
 | sourceJar | -Dxjar.sourceJar | 源jar名称 | String | ${project.build.finalName}.jar | 文件名称 |
 | targetDir | -Dxjar.targetDir | 目标jar存放目录 | File | ${project.build.directory} | 文件目录 |
