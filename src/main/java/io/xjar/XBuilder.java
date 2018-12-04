@@ -84,6 +84,9 @@ public abstract class XBuilder extends AbstractMojo {
     @Parameter(property = "xjar.excludes")
     private String[] excludes;
 
+    /**
+     * 项目打包模式，只对packaging == jar 的模块构建XJar
+     */
     @Parameter(readonly = true, defaultValue = "${project.packaging}")
     private String packaging;
 
