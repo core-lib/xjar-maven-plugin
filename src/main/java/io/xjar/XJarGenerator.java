@@ -7,12 +7,12 @@ import org.apache.maven.plugins.annotations.Mojo;
 import java.io.File;
 
 /**
- * Spring-Boot XJar 生成 Maven 插件
+ * XJar - 原生 JAR 加密插件
  *
  * @author Payne 646742615@qq.com
  * 2018/12/4 14:02
  */
-@Mojo(name = "generate-jar")
+@Mojo(name = "jar")
 public class XJarGenerator extends XGenerator {
 
     @Override
