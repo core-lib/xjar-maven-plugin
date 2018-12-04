@@ -4,7 +4,7 @@
 GitHub: https://github.com/core-lib/xjar-maven-plugin
 
 ## 什么是XJar
-XJar 是基于对JAR包内资源的加密以及拓展ClassLoader来构建的一套程序加密启动，动态解密运行的方案，避免源码泄露或反编译，支持Spring Boot JAR 安全加密运行工具，同时支持的原生JAR。
+XJar 是基于对JAR包内资源的加密以及拓展ClassLoader来构建的一套程序加密启动，动态解密运行的方案，避免源码泄露或反编译，支持Spring Boot JAR 安全加密运行，同时支持的原生JAR。
 更多文档请点击：[XJar](https://github.com/core-lib/xjar)
 
 ## 环境依赖
