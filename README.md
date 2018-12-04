@@ -1,4 +1,4 @@
-# XJar-Maven-Plugin
+# XJar-Maven-Plugin [![](https://jitpack.io/v/core-lib/xjar-maven-plugin.svg)](https://jitpack.io/#core-lib/xjar-maven-plugin)
 #### XJar-Maven-Plugin 是对 [XJar](https://github.com/core-lib/xjar) 的一个Maven Plugin封装，实现可通过Maven命令或绑定在Maven构建的生命周期之中执行，用以更加便捷的方式集成 [XJar](https://github.com/core-lib/xjar) 。
 
 GitHub: https://github.com/core-lib/xjar-maven-plugin
@@ -22,7 +22,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>v1.0.4</version>
+                <version>LATEST_VERSION</version>
                 <executions>
                     <execution>
                         <goals>
