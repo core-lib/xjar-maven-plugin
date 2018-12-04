@@ -41,6 +41,9 @@ JDK 1.7 +
 ```
 
 ## **参数说明**
-| 参数名称 | 命令参数名称 | 参数说明 | 可选值 |
-| :------ | :----------- | :------ | :----- |
-| algorithm | -Dxjar.algorithm | 加密算法名称 | JDK内置加密算法，如：AES / DES |
+| 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 可选值 |
+| :------ | :----------- | :------ | :------ | :----- | :----- |
+| algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES | JDK内置加密算法，如：AES / DES |
+| keySize | -Dxjar.algorithm | 加密算法名称 | int | 128 | JDK内置加密算法，如：AES / DES |
+| ivSize | -Dxjar.algorithm | 加密算法名称 | int | 128 | JDK内置加密算法，如：AES / DES |
+| password | -Dxjar.algorithm | 加密算法名称 | String | 必须 | JDK内置加密算法，如：AES / DES |
