@@ -1,6 +1,6 @@
 package io.xjar;
 
-import io.xjar.boot.XBoot;
+import io.xjar.jar.XJar;
 import org.apache.commons.compress.archivers.jar.JarArchiveEntry;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -17,7 +17,7 @@ public class XJarGenerator extends XGenerator {
 
     @Override
     protected void generate(File src, File dest, String password, String algorithm, int keySize, int ivSize, XEntryFilter<JarArchiveEntry> filter) throws Exception {
-        XBoot.encrypt(src, dest, password, algorithm, keySize, ivSize, filter);
+        XJar.encrypt(src, dest, password, algorithm, keySize, ivSize, filter);
     }
 
 }
