@@ -64,6 +64,19 @@ mvn xjar:spring-boot -Dxjar.password=io.xjar
 mvn xjar:jar -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.xjar 
 ```
 
+## 注意事项
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <!-- 请将executable参数删除或设置为false，目前还不能支持对该模式Jar的加密！ 
+    <configuration>
+        <executable>true</executable>
+    </configuration>
+    -->
+</plugin>
+```
+
 ## 命令目标
 | 目标名称 | 目标说明 |
 | :------- | :------ |
