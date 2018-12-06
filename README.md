@@ -88,6 +88,8 @@ mvn xjar:jar -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.
 当 includes 和 excludes 同时使用时，excludes 将会失效！
 
 ## 版本记录
+* v1.0.5
+    * 引用新版本的XJar(v1.0.9)，修复不同版本的Spring-Boot加密无法运行问题
 * v1.0.4
     * 第一个正式版发布
 
