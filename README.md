@@ -69,9 +69,10 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 <plugin>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-maven-plugin</artifactId>
-    <!-- 请将executable参数删除或设置为false，目前还不能支持对该模式Jar的加密！后面将会支持该方式的打包。 
+    <!-- 必须将executable和embeddedLaunchScript参数删除，目前还不能支持对该模式Jar的加密！后面将会支持该方式的打包。 
     <configuration>
         <executable>true</executable>
+        <embeddedLaunchScript>...</embeddedLaunchScript>
     </configuration>
     -->
 </plugin>
@@ -97,6 +98,7 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 ## 版本记录
 * v1.0.6
     * 将对普通jar项目或模块和spring boot项目或模块的插件方式加密整合成一个智能分析goal，配置时无需关心当前项目或模块是哪一种。
+    * 对于无法加密的Jar进行友好提示
     * 升级 XJar 版本为 v1.1.0
 * v1.0.5
     * 引用新版本的XJar(v1.0.9)，修复不同版本的Spring-Boot加密无法运行问题
