@@ -156,13 +156,25 @@ public class XBuilder extends AbstractMojo {
                 // 不允许开启 <executable>true<executable>
                 if (configuration instanceof Xpp3Dom) {
                     Xpp3Dom dom = (Xpp3Dom) configuration;
-                    Xpp3Dom child = dom.getChild("executable");
-                    String executable = child != null ? child.getValue() : null;
-                    if ("true".equalsIgnoreCase(executable)) {
-                        String msg = "Unsupported to build an xjar for an <executable>true</executable> spring boot JAR file, ";
-                        msg += "maybe you should upgrade xjar-maven-plugin dependency if it have been supported in the later versions,";
-                        msg += "if not, delete <executable>true</executable> or set executable as false for the configuration of spring-boot-maven-plugin.";
-                        throw new MojoFailureException(msg);
+                    {
+                        Xpp3Dom child = dom.getChild("executable");
+                        String executable = child != null ? child.getValue() : null;
+                        if ("true".equalsIgnoreCase(executable)) {
+                            String msg = "Unsupported to build an xjar for an <executable>true</executable> spring boot JAR file, ";
+                            msg += "maybe you should upgrade xjar-maven-plugin dependency if it have been supported in the later versions,";
+                            msg += "if not, delete <executable>true</executable> or set executable as false for the configuration of spring-boot-maven-plugin.";
+                            throw new MojoFailureException(msg);
+                        }
+                    }
+                    {
+                        Xpp3Dom child = dom.getChild("embeddedLaunchScript");
+                        String embeddedLaunchScript = child != null ? child.getValue() : null;
+                        if (embeddedLaunchScript != null) {
+                            String msg = "Unsupported to build an xjar for an <embeddedLaunchScript>...</embeddedLaunchScript> spring boot JAR file, ";
+                            msg += "maybe you should upgrade xjar-maven-plugin dependency if it have been supported in the later versions,";
+                            msg += "if not, delete <embeddedLaunchScript>...</embeddedLaunchScript> for the configuration of spring-boot-maven-plugin.";
+                            throw new MojoFailureException(msg);
+                        }
                     }
                 }
                 XBoot.encrypt(src, dest, password, algorithm, keySize, ivSize, filter);
