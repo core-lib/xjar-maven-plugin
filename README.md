@@ -30,7 +30,7 @@ JDK 1.7 +
                 <executions>
                     <execution>
                         <goals>
-                            <goal>spring-boot</goal>
+                            <goal>build</goal>
                         </goals>
                         <phase>package</phase>
                         <configuration>
@@ -60,8 +60,8 @@ JDK 1.7 +
 ```
 #### 也可以通过Maven命令执行
 ```text
-mvn xjar:spring-boot -Dxjar.password=io.xjar
-mvn xjar:jar -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.xjar 
+mvn xjar:build -Dxjar.password=io.xjar
+mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.xjar
 ```
 
 ## 注意事项
@@ -76,12 +76,6 @@ mvn xjar:jar -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.
     -->
 </plugin>
 ```
-
-## 命令目标
-| 目标名称 | 目标说明 |
-| :------- | :------ |
-| spring-boot | Spring-Boot项目或模块使用 |
-| jar | 普通jar项目或模块使用 |
 
 ## 参数说明
 | 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 示例值 |
@@ -101,6 +95,9 @@ mvn xjar:jar -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.
 当 includes 和 excludes 同时使用时，excludes 将会失效！
 
 ## 版本记录
+* v1.0.6
+    * 将对普通jar项目或模块和spring boot项目或模块的插件方式加密整合成一个智能分析goal，配置时无需关心当前项目或模块是哪一种。
+    * 升级 XJar 版本为 v1.1.0
 * v1.0.5
     * 引用新版本的XJar(v1.0.9)，修复不同版本的Spring-Boot加密无法运行问题
 * v1.0.4

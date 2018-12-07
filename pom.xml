@@ -35,7 +35,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.xjar</groupId>
+            <groupId>com.github.core-lib</groupId>
             <artifactId>xjar</artifactId>
             <version>v1.1.0</version>
         </dependency>
