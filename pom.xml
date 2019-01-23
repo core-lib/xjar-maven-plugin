@@ -4,7 +4,7 @@
     <groupId>com.github.core-lib</groupId>
     <artifactId>xjar-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>v1.0.6</version>
+    <version>v1.0.7</version>
     <name>XJar Maven Plugin</name>
     <description>XJar Maven Plugin</description>
     <url>https://github.com/core-lib/xjar-maven-plugin</url>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>com.github.core-lib</groupId>
             <artifactId>xjar</artifactId>
-            <version>v1.1.0</version>
+            <version>v1.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>

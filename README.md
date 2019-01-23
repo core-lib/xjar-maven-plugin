@@ -96,6 +96,8 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 当 includes 和 excludes 同时使用时，excludes 将会失效！
 
 ## 版本记录
+* v1.0.7
+    * bug修复
 * v1.0.6
     * 将对普通jar项目或模块和spring boot项目或模块的插件方式加密整合成一个智能分析goal，配置时无需关心当前项目或模块是哪一种。
     * 对于无法加密的Jar进行友好提示
