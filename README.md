@@ -96,6 +96,8 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 当 includes 和 excludes 同时使用时，excludes 将会失效！
 
 ## 版本记录
+* v1.0.8
+    * 避免过滤器使用不当造成无法启动
 * v1.0.7
     * bug修复
 * v1.0.6
