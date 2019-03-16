@@ -39,6 +39,7 @@ JDK 1.7 +
                             <algorithm/>
                             <keySize/>
                             <ivSize/>
+                            <mode/>
                             <includes>
                                 <include/>
                             </includes>
@@ -64,6 +65,9 @@ mvn xjar:build -Dxjar.password=io.xjar
 mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.xjar
 ```
 
+##强烈建议
+强烈建议不要在 pom.xml 的 xjar-maven-plugin 配置中写上密码，这样会导致打包出来的 xjar 包中的 pom.xml 文件保留着密码，极其容易暴露密码！强烈推荐通过 mvn 命令来指定加密密钥！
+
 ## 注意事项
 ```xml
 <plugin>
@@ -85,6 +89,7 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 | algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES | JDK内置加密算法，如：AES / DES |
 | keySize | -Dxjar.keySize | 密钥长度 | int | 128 | 根据加密算法而定，56，128，256 |
 | ivSize | -Dxjar.ivSize | 密钥向量长度 | int | 128 | 根据加密算法而定，128 |
+| mode | -Dxjar.mode | 加密模式 | int | 0 | 0：普通模式 1：危险模式（免密码启动）|
 | sourceDir | -Dxjar.sourceDir | 源jar所在目录 | File | ${project.build.directory} | 文件目录 |
 | sourceJar | -Dxjar.sourceJar | 源jar名称 | String | ${project.build.finalName}.jar | 文件名称 |
 | targetDir | -Dxjar.targetDir | 目标jar存放目录 | File | ${project.build.directory} | 文件目录 |
@@ -96,6 +101,8 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 当 includes 和 excludes 同时使用时，excludes 将会失效！
 
 ## 版本记录
+* v1.0.9
+    * 支持危险模式加密，实现免密码启动，但是请谨慎使用！
 * v1.0.8
     * 避免过滤器使用不当造成无法启动
 * v1.0.7

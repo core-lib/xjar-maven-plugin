@@ -54,6 +54,12 @@ public class XBuilder extends AbstractMojo {
     private int ivSize;
 
     /**
+     * 加密模式
+     */
+    @Parameter(property = "xjar.mode", required = true, defaultValue = "0")
+    private int mode;
+
+    /**
      * 加密密码
      */
     @Parameter(property = "xjar.password", required = true)
@@ -115,7 +121,8 @@ public class XBuilder extends AbstractMojo {
                 log.debug("Using algorithm: " + algorithm);
                 log.debug("Using key-size: " + keySize);
                 log.debug("Using iv-size: " + ivSize);
-                log.debug("Using password: " + algorithm);
+                log.debug("Using password: " + password);
+                log.debug("Using mode: " + mode);
             }
             File src = new File(sourceDir, sourceJar);
             File dest = new File(targetDir, targetJar);
@@ -148,7 +155,7 @@ public class XBuilder extends AbstractMojo {
             Plugin plugin = plugins.get("org.springframework.boot:spring-boot-maven-plugin");
             // 非Spring-Boot项目/模块
             if (plugin == null) {
-                XJar.encrypt(src, dest, password, algorithm, keySize, ivSize, filter);
+                XJar.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
             }
             // Spring-Boot项目/模块
             else {
@@ -177,7 +184,7 @@ public class XBuilder extends AbstractMojo {
                         }
                     }
                 }
-                XBoot.encrypt(src, dest, password, algorithm, keySize, ivSize, filter);
+                XBoot.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
             }
         } catch (MojoExecutionException | MojoFailureException e) {
             throw e;
@@ -216,6 +223,14 @@ public class XBuilder extends AbstractMojo {
 
     public void setIvSize(int ivSize) {
         this.ivSize = ivSize;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 
     public String getPassword() {
