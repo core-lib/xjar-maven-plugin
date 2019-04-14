@@ -102,6 +102,9 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 * mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
+* v1.1.0
+    * 支持 Spring-Boot 以ZIP方式打包，即依赖外部化方式启动。
+    * 修复无加密资源时无法启动问题
 * v1.0.9
     * 支持危险模式加密，实现免密码启动，但是请谨慎使用！
 * v1.0.8
