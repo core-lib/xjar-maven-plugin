@@ -103,6 +103,8 @@ mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/targe
 
 ## 版本记录
 * v2.0.1
+    * 原生jar增加密钥文件的启动方式，解决类似 nohup 和 javaw 的后台启动方式无法通过控制台输入密码的问题
+* v2.0.1
     * 增加密钥文件的启动方式，解决类似 nohup 和 javaw 的后台启动方式无法通过控制台输入密码的问题
     * 修复解密后没有删除危险模式中在MANIFEST.MF中保留的密钥信息
 * v2.0.0
