@@ -26,7 +26,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>LATEST_VERSION</version>
+                <version>v2.0.2</version>
                 <executions>
                     <execution>
                         <goals>
