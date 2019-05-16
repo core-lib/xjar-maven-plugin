@@ -93,8 +93,8 @@ public class XBuilder extends AbstractMojo {
      * 包含资源，避免和excludes配置一起使用，如果混合使用则excludes失效。
      * 使用Ant表达式，例如：
      * io/xjar/**
-     * BOOT-INF/classes/**
-     * BOOT-INF/lib/*.jar
+     * com/company/project/**
+     * mapper/*Mapper.xml
      */
     @Parameter(property = "xjar.includes")
     private String[] includes;
@@ -103,8 +103,8 @@ public class XBuilder extends AbstractMojo {
      * 排除资源，避免和includes配置一起使用，如果混合使用则excludes失效。
      * 使用Ant表达式，例如：
      * io/xjar/**
-     * BOOT-INF/classes/**
-     * BOOT-INF/lib/*.jar
+     * static/**
+     * META-INF/resources/**
      */
     @Parameter(property = "xjar.excludes")
     private String[] excludes;
