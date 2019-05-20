@@ -104,7 +104,7 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 | excludes | -Dxjar.excludes | 无需加密的资源路径表达式 | String[] | 无 | static/** , META-INF/resources/** , 支持Ant表达式 |
 
 #### 注意：
-* 当 includes 和 excludes 同时使用时，excludes 将会失效！
+* 当 includes 和 excludes 同时使用时即加密在includes的范围内且排除了excludes的资源。
 * mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
