@@ -3,6 +3,7 @@ package io.xjar;
 import io.xjar.boot.XBoot;
 import io.xjar.filter.XAllEntryFilter;
 import io.xjar.filter.XAnyEntryFilter;
+import io.xjar.filter.XMixEntryFilter;
 import io.xjar.jar.XJar;
 import org.apache.commons.compress.archivers.jar.JarArchiveEntry;
 import org.apache.maven.model.Build;
@@ -109,6 +110,7 @@ public class XBuilder extends AbstractMojo {
     @Parameter(property = "xjar.excludes")
     private String[] excludes;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         Log log = getLog();
         String packaging = project.getPackaging();
@@ -131,25 +133,31 @@ public class XBuilder extends AbstractMojo {
                 throw new IOException("could not make directory: " + folder);
             }
             log.info("Building xjar: " + dest + " for jar: " + src);
-            XEntryFilter<JarArchiveEntry> filter;
-            if (includes != null && includes.length > 0) {
-                XAnyEntryFilter<JarArchiveEntry> xIncludesFilter = XKit.any();
-                for (int i = 0; includes != null && i < includes.length; i++) {
-                    xIncludesFilter.mix(new XIncludeAntEntryFilter(includes[i]));
-                    log.info("Including " + includes[i]);
-                }
-                filter = xIncludesFilter;
-            } else if (excludes != null && excludes.length > 0) {
-                XAllEntryFilter<JarArchiveEntry> xExcludesFilter = XKit.all();
-                for (int i = 0; excludes != null && i < excludes.length; i++) {
-                    xExcludesFilter.mix(new XExcludeAntEntryFilter(excludes[i]));
-                    log.info("Excluding " + excludes[i]);
-                }
-                filter = xExcludesFilter;
-            } else {
+
+            XMixEntryFilter<JarArchiveEntry> filter;
+            if (XArray.isEmpty(includes) && XArray.isEmpty(excludes)) {
                 filter = null;
                 log.info("Including all resources");
+            } else {
+                filter = XKit.all();
+                if (!XArray.isEmpty(includes)) {
+                    XAnyEntryFilter<JarArchiveEntry> including = XKit.any();
+                    for (String include : includes) {
+                        including.mix(new XIncludeAntEntryFilter(include));
+                        log.info("Including " + include);
+                    }
+                    filter.mix(including);
+                }
+                if (!XArray.isEmpty(excludes)) {
+                    XAllEntryFilter<JarArchiveEntry> excluding = XKit.all();
+                    for (String exclude : excludes) {
+                        excluding.mix(new XExcludeAntEntryFilter(exclude));
+                        log.info("Excluding " + exclude);
+                    }
+                    filter.mix(excluding);
+                }
             }
+
             Build build = project.getBuild();
             Map<String, Plugin> plugins = build.getPluginsAsMap();
             Plugin plugin = plugins.get("org.springframework.boot:spring-boot-maven-plugin");
