@@ -59,10 +59,16 @@ JDK 1.7 +
     </build>
 </project>
 ```
-#### 也可以通过Maven命令执行
+#### 也可以通过Maven命令单独执行 XJar 插件
 ```text
 mvn xjar:build -Dxjar.password=io.xjar
 mvn xjar:build -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.xjar
+```
+
+#### 但通常情况下是让XJar插件绑定到指定的phase中自动执行，这样就能在项目构建的时候自动构建出加密的包。
+```text
+mvn clean package -Dxjar.password=io.xjar
+mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/target.xjar
 ```
 
 ## 强烈建议
