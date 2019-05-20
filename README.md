@@ -58,6 +58,7 @@ JDK 1.7 +
         </plugins>
     </build>
 </project>
+
 ```
 #### 也可以通过Maven命令单独执行 XJar 插件
 ```text
