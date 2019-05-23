@@ -26,7 +26,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>v2.0.4</version>
+                <version>v2.0.5</version>
                 <executions>
                     <execution>
                         <goals>
@@ -109,6 +109,9 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 * mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
+* v2.0.5
+    * 升级[LoadKit](https://github.com/core-lib/loadkit)依赖版本
+    * 修复ANT表达式无法正确匹配**/*通配符的问题
 * v2.0.4
     * 解决危险模式不支持ubuntu系统的问题
 * v2.0.3

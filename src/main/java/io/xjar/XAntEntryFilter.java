@@ -17,9 +17,10 @@ public abstract class XAntEntryFilter implements XEntryFilter<JarArchiveEntry> {
     protected XAntEntryFilter(String ant) {
         String regex = ant;
         for (String symbol : SYMBOLS) regex = regex.replace(symbol, '\\' + symbol);
-        regex = regex.replace("**", ".{0,}");
-        regex = regex.replace("*", "[^/]{0,}");
         regex = regex.replace("?", ".{1}");
+        regex = regex.replace("**/", "(.{0,}?/){0,}?");
+        regex = regex.replace("**", ".{0,}?");
+        regex = regex.replace("*", "[^/]{0,}?");
         while (regex.startsWith("/")) regex = regex.substring(1);
         while (regex.endsWith("/")) regex = regex.substring(0, regex.length() - 1);
         this.pattern = Pattern.compile(regex);
