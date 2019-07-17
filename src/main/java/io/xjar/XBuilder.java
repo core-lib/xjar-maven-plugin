@@ -54,11 +54,6 @@ public class XBuilder extends AbstractMojo {
     @Parameter(property = "xjar.ivSize", required = true, defaultValue = "128")
     private int ivSize;
 
-    /**
-     * 加密模式
-     */
-    @Parameter(property = "xjar.mode", required = true, defaultValue = "0")
-    private int mode;
 
     /**
      * 加密密码
@@ -124,7 +119,6 @@ public class XBuilder extends AbstractMojo {
                 log.debug("Using key-size: " + keySize);
                 log.debug("Using iv-size: " + ivSize);
                 log.debug("Using password: " + password);
-                log.debug("Using mode: " + mode);
             }
             File src = new File(sourceDir, sourceJar);
             File dest = new File(targetDir, targetJar);
@@ -163,7 +157,7 @@ public class XBuilder extends AbstractMojo {
             Plugin plugin = plugins.get("org.springframework.boot:spring-boot-maven-plugin");
             // 非Spring-Boot项目/模块
             if (plugin == null) {
-                XJar.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
+                XJar.encryptor().filter(filter).build().encrypt(XKit.key(algorithm, keySize, ivSize, password), src, dest);
             }
             // Spring-Boot项目/模块
             else {
@@ -192,9 +186,9 @@ public class XBuilder extends AbstractMojo {
                         }
                     }
                 }
-                XBoot.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
+                XBoot.encryptor().filter(filter).build().encrypt(XKit.key(algorithm, keySize, ivSize, password), src, dest);
             }
-        } catch (MojoExecutionException | MojoFailureException e) {
+        } catch (MojoFailureException e) {
             throw e;
         } catch (Exception e) {
             throw new MojoExecutionException("could not build xjar", e);
@@ -231,14 +225,6 @@ public class XBuilder extends AbstractMojo {
 
     public void setIvSize(int ivSize) {
         this.ivSize = ivSize;
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
     }
 
     public String getPassword() {
