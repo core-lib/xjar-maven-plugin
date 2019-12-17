@@ -26,7 +26,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>v2.0.6</version>
+                <version>v2.0.7</version>
                 <executions>
                     <execution>
                         <goals>
@@ -103,12 +103,14 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 | targetJar | -Dxjar.targetJar | 目标jar名称 | String | ${project.build.finalName}.xjar | 文件名称 |
 | includes | -Dxjar.includes | 需要加密的资源路径表达式 | String[] | 无 | com/company/project/** , mapper/*Mapper.xml , 支持Ant表达式 |
 | excludes | -Dxjar.excludes | 无需加密的资源路径表达式 | String[] | 无 | static/** , META-INF/resources/** , 支持Ant表达式 |
-
+| deletes | -Dxjar.deletes | 加密后删除指定资源路径表达式 | String[] | 无 | target/*.jar, ../module/target/*.jar, 支持Ant表达式 |
 #### 注意：
 * 当 includes 和 excludes 同时使用时即加密在includes的范围内且排除了excludes的资源。
 * mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
+* v2.0.7
+    * 支持加密后删除指定资源
 * v2.0.6
     * 解决多jar包启动时无法找到准确的MANIFEST.MF导致无法正常启动的问题
 * v2.0.5
