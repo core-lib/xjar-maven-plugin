@@ -109,6 +109,8 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 * mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
+* 2.0.8
+    * 版本号去除"v"前缀
 * v2.0.7
     * 支持加密后删除指定资源
 * v2.0.6
