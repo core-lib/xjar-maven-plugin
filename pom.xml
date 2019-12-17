@@ -4,7 +4,7 @@
     <groupId>com.github.core-lib</groupId>
     <artifactId>xjar-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>v2.0.6</version>
+    <version>v2.0.7</version>
     <name>XJar Maven Plugin</name>
     <description>XJar Maven Plugin</description>
     <url>https://github.com/core-lib/xjar-maven-plugin</url>

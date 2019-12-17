@@ -1,5 +1,7 @@
 package io.xjar;
 
+import io.loadkit.Loaders;
+import io.loadkit.Resource;
 import io.xjar.boot.XBoot;
 import io.xjar.filter.XAllEntryFilter;
 import io.xjar.filter.XAnyEntryFilter;
@@ -20,6 +22,8 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -110,6 +114,15 @@ public class XBuilder extends AbstractMojo {
     @Parameter(property = "xjar.excludes")
     private String[] excludes;
 
+    /**
+     * 加密完成后需要删除的资源
+     * 支持Ant表达式，例如：
+     * target/*.jar
+     * ../module/target/*.jar
+     */
+    @Parameter(property = "xjar.deletes")
+    private String[] deletes;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         Log log = getLog();
@@ -194,6 +207,31 @@ public class XBuilder extends AbstractMojo {
                 }
                 XBoot.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
             }
+
+            File root = project.getFile().getParentFile();
+            for (int i = 0; deletes != null && i < deletes.length; i++) {
+                String delete = deletes[i];
+                File dir = root;
+                while (delete.startsWith("../")) {
+                    dir = dir.getParentFile() != null ? dir.getParentFile() : dir;
+                    delete = delete.substring("../".length());
+                }
+
+                log.info("Deleting file(s) matching pattern: " + dir.getCanonicalPath().replace('\\', '/') + "/" + delete);
+
+                Enumeration<Resource> resources = Loaders.ant(Loaders.file(dir)).load(delete);
+                while (resources.hasMoreElements()) {
+                    Resource resource = resources.nextElement();
+                    URL url = resource.getUrl();
+                    String path = url.getPath();
+                    File file = new File(path);
+                    log.debug("Deleting file: " + file.getCanonicalPath());
+                    if (!file.delete()) {
+                        log.warn("Could not delete file: " + file);
+                    }
+                }
+            }
+
         } catch (MojoExecutionException | MojoFailureException e) {
             throw e;
         } catch (Exception e) {
@@ -295,5 +333,13 @@ public class XBuilder extends AbstractMojo {
 
     public void setExcludes(String[] excludes) {
         this.excludes = excludes;
+    }
+
+    public String[] getDeletes() {
+        return deletes;
+    }
+
+    public void setDeletes(String[] deletes) {
+        this.deletes = deletes;
     }
 }
