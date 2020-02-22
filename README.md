@@ -26,7 +26,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>2.0.8</version>
+                <version>2.0.9</version>
                 <executions>
                     <execution>
                         <goals>
@@ -109,6 +109,9 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 * mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
+* 2.0.9
+    * 修复XJar类加载器加载的类没有 ProtectionDomain 以及 CodeSource 的问题
+    * 修复不同字符集机器间加密与运行的问题
 * 2.0.8
     * 版本号去除"v"前缀
 * v2.0.7
