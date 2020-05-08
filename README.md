@@ -75,6 +75,7 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 强烈建议不要在 pom.xml 的 xjar-maven-plugin 配置中写上密码，这样会导致打包出来的 xjar 包中的 pom.xml 文件保留着密码，极其容易暴露密码！强烈推荐通过 mvn 命令来指定加密密钥！
 
 ## 注意事项
+#### 不兼容 spring-boot-maven-plugin 的 executable = true 以及 embeddedLaunchScript
 ```xml
 <plugin>
     <groupId>org.springframework.boot</groupId>
@@ -107,6 +108,17 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 * 当 includes 和 excludes 同时使用时即加密在includes的范围内且排除了excludes的资源。
 
 ## 版本记录
+* 4.0.0
+    1. 加解密支持填充模式
+    2. 加解密支持IV-Parameter
+    3. 升级启动器
+    4. 移除危险模式
+    5. 拼写错误修正
+    6. 提供智能加密/解密器 避免使用失误
+    7. 删除多余的加密/解密方法
+    8. 修复有安全校验的nested-lib在不加密其内部资源情况下启动时也无法通过校验的问题
+    9. 去除命令启动和手输密码启动的方式只保留Go启动器的模式
+    10. 增加可读性更强的Fluent风格的加密/解密API
 * 2.0.9
     * 修复XJar类加载器加载的类没有 ProtectionDomain 以及 CodeSource 的问题
     * 修复不同字符集机器间加密与运行的问题
