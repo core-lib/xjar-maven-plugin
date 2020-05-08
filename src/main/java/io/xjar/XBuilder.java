@@ -43,7 +43,7 @@ public class XBuilder extends AbstractMojo {
     /**
      * 加密算法名称
      */
-    @Parameter(property = "xjar.algorithm", required = true, defaultValue = "AES")
+    @Parameter(property = "xjar.algorithm", required = true, defaultValue = "AES/CBC/PKCS5Padding")
     private String algorithm;
 
     /**
@@ -57,12 +57,6 @@ public class XBuilder extends AbstractMojo {
      */
     @Parameter(property = "xjar.ivSize", required = true, defaultValue = "128")
     private int ivSize;
-
-    /**
-     * 加密模式
-     */
-    @Parameter(property = "xjar.mode", required = true, defaultValue = "0")
-    private int mode;
 
     /**
      * 加密密码
@@ -95,7 +89,7 @@ public class XBuilder extends AbstractMojo {
     private String targetJar;
 
     /**
-     * 包含资源，避免和excludes配置一起使用，如果混合使用则excludes失效。
+     * 包含资源。
      * 使用Ant表达式，例如：
      * io/xjar/**
      * com/company/project/**
@@ -105,7 +99,7 @@ public class XBuilder extends AbstractMojo {
     private String[] includes;
 
     /**
-     * 排除资源，避免和includes配置一起使用，如果混合使用则excludes失效。
+     * 排除资源。
      * 使用Ant表达式，例如：
      * io/xjar/**
      * static/**
@@ -137,7 +131,6 @@ public class XBuilder extends AbstractMojo {
                 log.debug("Using key-size: " + keySize);
                 log.debug("Using iv-size: " + ivSize);
                 log.debug("Using password: " + password);
-                log.debug("Using mode: " + mode);
             }
             File src = new File(sourceDir, sourceJar);
             File dest = new File(targetDir, targetJar);
@@ -176,7 +169,7 @@ public class XBuilder extends AbstractMojo {
             Plugin plugin = plugins.get("org.springframework.boot:spring-boot-maven-plugin");
             // 非Spring-Boot项目/模块
             if (plugin == null) {
-                XJar.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
+                XJar.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), filter);
             }
             // Spring-Boot项目/模块
             else {
@@ -205,7 +198,7 @@ public class XBuilder extends AbstractMojo {
                         }
                     }
                 }
-                XBoot.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), mode, filter);
+                XBoot.encrypt(src, dest, XKit.key(algorithm, keySize, ivSize, password), filter);
             }
 
             File root = project.getFile().getParentFile();
@@ -269,14 +262,6 @@ public class XBuilder extends AbstractMojo {
 
     public void setIvSize(int ivSize) {
         this.ivSize = ivSize;
-    }
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
     }
 
     public String getPassword() {

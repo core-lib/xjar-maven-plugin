@@ -26,7 +26,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>2.0.9</version>
+                <version>4.0.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -39,7 +39,6 @@ JDK 1.7 +
                             <algorithm/>
                             <keySize/>
                             <ivSize/>
-                            <mode/>
                             <includes>
                                 <include/>
                             </includes>
@@ -93,10 +92,9 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 | 参数名称 | 命令参数名称 | 参数说明 | 参数类型 | 缺省值 | 示例值 |
 | :------ | :----------- | :------ | :------ | :----- | :----- |
 | password | -Dxjar.password | 密码字符串 | String | 必须 | 任意字符串，io.xjar |
-| algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES | JDK内置加密算法，如：AES / DES |
+| algorithm | -Dxjar.algorithm | 加密算法名称 | String | AES/CBC/PKCS5Padding | JDK内置加密算法，如：AES/CBC/PKCS5Padding 和 DES/CBC/PKCS5Padding |
 | keySize | -Dxjar.keySize | 密钥长度 | int | 128 | 根据加密算法而定，56，128，256 |
 | ivSize | -Dxjar.ivSize | 密钥向量长度 | int | 128 | 根据加密算法而定，128 |
-| mode | -Dxjar.mode | 加密模式 | int | 0 | 0：普通模式 1：危险模式（免密码启动）|
 | sourceDir | -Dxjar.sourceDir | 源jar所在目录 | File | ${project.build.directory} | 文件目录 |
 | sourceJar | -Dxjar.sourceJar | 源jar名称 | String | ${project.build.finalName}.jar | 文件名称 |
 | targetDir | -Dxjar.targetDir | 目标jar存放目录 | File | ${project.build.directory} | 文件目录 |
@@ -104,9 +102,9 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 | includes | -Dxjar.includes | 需要加密的资源路径表达式 | String[] | 无 | com/company/project/** , mapper/*Mapper.xml , 支持Ant表达式 |
 | excludes | -Dxjar.excludes | 无需加密的资源路径表达式 | String[] | 无 | static/** , META-INF/resources/** , 支持Ant表达式 |
 | deletes | -Dxjar.deletes | 加密后删除指定资源路径表达式 | String[] | 无 | target/\*.jar, ../module/target/\*.jar, 支持Ant表达式 |
-#### 注意：
+
+* 指定加密算法的时候密钥长度以及向量长度必须在算法可支持范围内, 具体加密算法的密钥及向量长度请自行百度或谷歌.
 * 当 includes 和 excludes 同时使用时即加密在includes的范围内且排除了excludes的资源。
-* mode 设置为 1 时表示危险加密模式，但同时也是免密码启动，请谨慎使用！
 
 ## 版本记录
 * 2.0.9
