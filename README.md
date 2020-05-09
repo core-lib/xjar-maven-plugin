@@ -26,7 +26,7 @@ JDK 1.7 +
             <plugin>
                 <groupId>com.github.core-lib</groupId>
                 <artifactId>xjar-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>4.0.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -108,6 +108,8 @@ mvn clean install -Dxjar.password=io.xjar -Dxjar.targetDir=/directory/to/save/ta
 * 当 includes 和 excludes 同时使用时即加密在includes的范围内且排除了excludes的资源。
 
 ## 版本记录
+* 4.0.1
+    1. 兼容JDK-9及以上版本
 * 4.0.0
     1. 加解密支持填充模式
     2. 加解密支持IV-Parameter
